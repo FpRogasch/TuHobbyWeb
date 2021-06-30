@@ -62,7 +62,7 @@ namespace TuHobbyWeb.Controllers
                         User user = await _db.Users.FirstOrDefaultAsync(x => x.EmailAddress == model.EmailAddress);
                         if (user != null)
                         {
-                            TempData["ErrorMessage"] = "This user is already registered";
+                            TempData["ErrorMessage"] = "Este Email ya ha sido registrado";
                             return View(model);
                         }
 
@@ -90,11 +90,11 @@ namespace TuHobbyWeb.Controllers
                         string body = $"Para activar su cuenta acceda a la siguiente url: <a href='{urlPath}'> Click aquí, para activar su cuenta</a>";
                         if (EmailHelper.Send(model.EmailAddress, "Verifique su Email", body, out string message))
                         {
-                            TempData["SuccessMessage"] = "The user was created correctly, please check your email address";
+                            TempData["SuccessMessage"] = "El Usuario ha sido creado correctamente. Por favor, validar la cuenta, verificando su Email.";
                             transaction.Commit();
                             return RedirectToAction("Index", "Home");
                         }
-                        TempData["ErrorMessage"] = "There were Problems sending the Validation Email.";
+                        TempData["ErrorMessage"] = "Ocurrió un Problema enviando el Correo de Validación.";
                         transaction.Rollback();
                         return View(model);
                     } catch (Exception e)
