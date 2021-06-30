@@ -1,0 +1,37 @@
+﻿@model TuHobbyWeb.Models.ViewModels.ProductCreateViewModel
+@{
+    ViewBag.Title = "Crear un nuevo Producto";
+}
+
+<div class="card mt-5">
+    <div class="card-header">
+        <h3>@ViewBag.Title</h3>
+    </div>
+    <div class="card-body">
+        <form action="/product/create" method="POST">
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label>Código:</label>
+                <input type="text" class="form-control" name="ProductCode" value="@Model.ProductCode" />
+                @Html.ValidationMessageFor(x => x.ProductCode, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>Nombre:</label>
+                <input type="text" class="form-control" name="ProductName" value="@Model.ProductName" />
+                @Html.ValidationMessageFor(x => x.ProductName, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>Precio:</label>
+                <input type="text" class="form-control" name="ProductPrice" value="@Model.ProductPrice" />
+                @Html.ValidationMessageFor(x => x.ProductPrice, null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>Stock:</label>
+                <input type="text" class="form-control" name="ProductStock" value="@Model.ProductStock" />
+                @Html.ValidationMessageFor(x => x.ProductStock, null, new { @class = "text-danger" })
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Guardar</button>
+            <button type="reset" class="btn btn-secondary btn-block">Limpiar formulario</button>
+        </form>
+    </div>
+</div>
