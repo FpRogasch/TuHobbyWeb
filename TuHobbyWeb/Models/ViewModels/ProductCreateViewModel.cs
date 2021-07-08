@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using TuHobbyWeb.Models.Entities;
 
 namespace TuHobbyWeb.Models.ViewModels
 {
@@ -17,5 +18,11 @@ namespace TuHobbyWeb.Models.ViewModels
         public int? ProductPrice { get; set; }
         [Required]
         public int? ProductStock { get; set; }
+        [Required]
+        public int PlatformId { get; set; }
+        [Required]
+        public HttpPostedFileBase ProductFile { get; set; }
+
+        public List<ProductPlatform> ProductPlatforms { get; set; }
     }
 }

@@ -25,6 +25,7 @@ namespace TuHobbyWeb.Models.Entities
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductPlatform> ProductPlatforms { get; set; }
     }
 
     //public class MyEntity

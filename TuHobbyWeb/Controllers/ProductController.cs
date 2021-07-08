@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -14,7 +15,7 @@ namespace TuHobbyWeb.Controllers
 {
     [Authorize(Roles = StringHelper.ROLE_ADMINISTRATOR)]
 
-    public class ProductController : Controller
+    public class ProductController : DefaultBaseController
     {
         private readonly AplicationDbContext _db = new AplicationDbContext();
         // GET: Product
@@ -39,13 +40,16 @@ namespace TuHobbyWeb.Controllers
             }
             return View(product);
         }
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return View(new ProductCreateViewModel());
-        }
 
         // Crear Producto en la DB
+        [HttpGet]
+        public async Task<ActionResult> Create()
+        {
+            var vm = new ProductCreateViewModel();
+            vm.ProductPlatforms = await _db.ProductPlatforms.OrderBy(x => x.ProductPlatformName).ToListAsync();
+            return View(vm);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(ProductCreateViewModel model)
@@ -63,8 +67,11 @@ namespace TuHobbyWeb.Controllers
                     ProductCode = model.ProductCode,
                     ProductName = model.ProductName,
                     ProductPrice = (int)model.ProductPrice,
-                    ProductStock = (int)model.ProductStock
-            };
+                    ProductStock = (int)model.ProductStock,
+                    PlatformId = model.PlatformId
+                };
+
+                product.ProductImage = UploadFile(model.ProductFile, "products");
 
                 _db.Products.Add(product);
                 await _db.SaveChangesAsync();

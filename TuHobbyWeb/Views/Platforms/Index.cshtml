@@ -1,0 +1,26 @@
+﻿@model List<TuHobbyWeb.Models.Entities.ProductPlatform>
+@{
+}
+
+<div class="card mt-4">
+    <div class="card-header">
+        <h3>Listado de Plataformas registradas</h3>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <th>Nombre</th>
+                <th>Logo</th>
+                <th>Cantidad de Juegos</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductPlatformName</td>
+                    <td><img src="@item.ProductPlatformLogo" alt="@item.ProductPlatformName" width="200"/></td>
+                    <td>0</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
