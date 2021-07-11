@@ -1,4 +1,4 @@
-﻿@model TuHobbyWeb.Models.Entities.Product
+﻿@model TuHobbyWeb.Models.ViewModels.ProductCreateViewModel
 @{
     ViewBag.Title = $"Producto {Model.ProductCode} - {Model.ProductName}";
 }
@@ -10,26 +10,57 @@
     <div class="card-body">
         <form action="/product/update" method="POST">
             @Html.AntiForgeryToken()
-            <input type="hidden" name="ProductId" value="@Model.ProductId" />
+            <input type="hidden" name="ProductId" value="@Model.Product.ProductId" />
             <div class="form-group">
                 <label>Código:</label>
-                <input type="text" class="form-control" name="ProductCode" value="@Model.ProductCode" />
+                <input type="text" class="form-control" name="ProductCode" value="@Model.Product.ProductCode" />
                 @Html.ValidationMessageFor(x => x.ProductCode, null, new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 <label>Nombre:</label>
-                <input type="text" class="form-control" name="ProductName" value="@Model.ProductName" />
+                <input type="text" class="form-control" name="ProductName" value="@Model.Product.ProductName" />
                 @Html.ValidationMessageFor(x => x.ProductName, null, new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 <label>Precio:</label>
-                <input type="text" class="form-control" name="ProductPrice" value="@Model.ProductPrice" />
+                <input type="text" class="form-control" name="ProductPrice" value="@Model.Product.ProductPrice" />
                 @Html.ValidationMessageFor(x => x.ProductPrice, null, new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 <label>Stock:</label>
-                <input type="text" class="form-control" name="ProductStock" value="@Model.ProductStock" />
+                <input type="text" class="form-control" name="ProductStock" value="@Model.Product.ProductStock" />
                 @Html.ValidationMessageFor(x => x.ProductStock, null, new { @class = "text-danger" })
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Imagen:</label>
+                        <input type="file" name="ProductFile" value="" />
+                        @Html.ValidationMessageFor(x => x.ProductFile, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-6">
+                    <img width="200" src="@Model.Product.ProductImage" alt="@Model.Product.ProductName" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Plataforma:</label>
+                <select class="form-control" name="PlatformId">
+                    <option value="">Selecione una Opción</option>
+                    @foreach (var item in Model.ProductPlatforms)
+                    {
+                        if (item.ProductPlatformId == Model.Product.PlatformId)
+                        {
+                            <option value="@item.ProductPlatformId" selected>@item.ProductPlatformName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.ProductPlatformId">@item.ProductPlatformName</option>
+                        }
+
+                    }
+                </select>
+                @Html.ValidationMessageFor(x => x.PlatformId, null, new { @class = "text-danger" })
             </div>
             <button type="submit" class="btn btn-success btn-block">Actualizar</button>
             <a href="/product" class="btn btn-secondary btn-block">Volver</a>

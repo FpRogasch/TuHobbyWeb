@@ -38,16 +38,31 @@ namespace TuHobbyWeb.Controllers
                 TempData["ErrorMessage"] = "El producto no fue encontrado";
                 return RedirectToAction("Index");
             }
-            return View(product);
+
+            var vm = await GetCreateViewModel(product);
+
+            return View(vm);
         }
 
         // Crear Producto en la DB
         [HttpGet]
         public async Task<ActionResult> Create()
         {
+            var vm = await GetCreateViewModel();
+            return View(vm);
+        }
+
+        public async Task<ProductCreateViewModel> GetCreateViewModel(Product product = null)
+        {
             var vm = new ProductCreateViewModel();
             vm.ProductPlatforms = await _db.ProductPlatforms.OrderBy(x => x.ProductPlatformName).ToListAsync();
-            return View(vm);
+            
+            if (product != null)
+            {
+                vm.Product = product;
+            }
+
+            return vm;
         }
 
         [HttpPost]
@@ -95,13 +110,14 @@ namespace TuHobbyWeb.Controllers
                     return RedirectToAction("Index");
                 }
 
-                var product = await _db.Products.FirstOrDefaultAsync(x => x.ProductCode == model.ProductCode);
+                var product = await _db.Products.FindAsync(model.ProductId);
                 if (product == null)
                 {
                     TempData["ErrorMessage"] = "El Producto no se encuentra registrado, imposible actualizar";
                     return RedirectToAction("Index");
                 }
 
+                product.ProductCode = model.ProductCode;
                 product.ProductName = model.ProductName;
                 product.ProductPrice = (int)model.ProductPrice;
                 product.ProductStock = (int)model.ProductStock;

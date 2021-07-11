@@ -1,12 +1,14 @@
-﻿@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-warning">
-        <p>@TempData["ErrorMessage"]</p>
-    </div>
-}
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success">
-        <p>@TempData["SuccessMessage"]</p>
-    </div>
-}
+﻿<div class="row mt-2">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-warning">
+            <p>@TempData["ErrorMessage"]</p>
+        </div>
+    }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            <p>@TempData["SuccessMessage"]</p>
+        </div>
+    }
+</div>
