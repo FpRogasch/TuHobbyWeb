@@ -1,10 +1,58 @@
-﻿@model List<TuHobbyWeb.Models.Entities.Product>
+﻿@model TuHobbyWeb.Models.ViewModels.ProductIndexViewModel
 @{ 
     ViewBag.Title = "Gestión de Productos";
 }
 
+<div class="card mt-3 mb-3">
+    <div class="card-header bg-secondary">
+        <h3>Filtro</h3>
+    </div>
+    <div class="card-body">
+        <form action="/Product" method="GET">
+            <div class="row">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label>Código:</label>
+                        <input type="text" name="ProductCode" value="@Model.ProductCode" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label>Nombre:</label>
+                        <input type="text" name="ProductName" value="@Model.ProductName" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label>Plataforma:</label>
+                        <select name="PlatformId" class="form-control">
+                            <option value="value">Seleccione una plataforma</option>
+                            @foreach (var item in Model.Platforms)
+                            {
+                                if (item.ProductPlatformId == Model.PlatformId)
+                                {
+                                    <option value="@item.ProductPlatformId" selected>@item.ProductPlatformName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.ProductPlatformId">@item.ProductPlatformName</option>
+                                }
 
-@if (Model != null && Model.Count > 0)
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block" style="margin-top: 32px;">Buscar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (Model.Products != null && Model.Products.Count > 0)
 {
     <div class="card mt-4">
         <div class="card-header">
@@ -21,13 +69,25 @@
             <table class="table table-hover">
                 <tr>
                     <th>Portada</th>
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Stock</th>
+                    <th>Código 
+                        <a href="/Product/index?sort=1"><i class="fas fa-sort-up"></i></a>
+                        <a href="/Product/index?sort=-1"><i class="fas fa-sort-down"></i></a>
+                    </th>
+                    <th>Nombre
+                        <a href="/Product/index?sort=2"><i class="fas fa-sort-up"></i></a>
+                        <a href="/Product/index?sort=-2"><i class="fas fa-sort-down"></i></a>
+                    </th>
+                    <th>Precio
+                        <a href="/Product/index?sort=3"><i class="fas fa-sort-up"></i></a>
+                        <a href="/Product/index?sort=-3"><i class="fas fa-sort-down"></i></a>
+                    </th>
+                    <th>Stock
+                        <a href="/Product/index?sort=4"><i class="fas fa-sort-up"></i></a>
+                        <a href="/Product/index?sort=-4"><i class="fas fa-sort-down"></i></a>
+                    </th>
                     <th></th>
                 </tr>
-                @foreach(var item in Model)
+                @foreach(var item in Model.Products)
                 {
                     <tr>
                         <td>

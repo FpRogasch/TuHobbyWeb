@@ -19,12 +19,60 @@ namespace TuHobbyWeb.Controllers
     {
         private readonly AplicationDbContext _db = new AplicationDbContext();
         // GET: Product
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(ProductIndexViewModel vm)
         {
-            var products = await _db.Products
-                                .OrderBy(x => x.ProductName)
-                                .ToListAsync();
-            return View(products);
+            vm.Products = await GetProducts(vm);
+
+            vm.Platforms = await _db.ProductPlatforms
+                                    .OrderBy(x => x.ProductPlatformName)
+                                    .ToListAsync();
+
+            return View(vm);
+        }
+
+        public async Task<List<Product>> GetProducts(ProductIndexViewModel vm)
+        {
+            var queryProduct = _db.Products.AsQueryable();
+
+            if (vm.ProductCode != null)
+                queryProduct = queryProduct.Where(x => x.ProductCode == vm.ProductCode);
+            if (vm.ProductName != null)
+                queryProduct = queryProduct.Where(x => x.ProductName == vm.ProductName);
+            if (vm.PlatformId != null)
+                queryProduct = queryProduct.Where(x => x.PlatformId == vm.PlatformId);
+
+            switch (vm.Sort)
+            {
+                case 1:
+                    queryProduct = queryProduct.OrderBy(x => x.ProductCode);
+                    break;
+                case -1:
+                    queryProduct = queryProduct.OrderByDescending(x => x.ProductCode);
+                    break;
+                case 2:
+                    queryProduct = queryProduct.OrderBy(x => x.ProductName);
+                    break;
+                case -2:
+                    queryProduct = queryProduct.OrderByDescending(x => x.ProductName);
+                    break;
+                case 3:
+                    queryProduct = queryProduct.OrderBy(x => x.ProductPrice);
+                    break;
+                case -3:
+                    queryProduct = queryProduct.OrderByDescending(x => x.ProductPrice);
+                    break;
+                case 4:
+                    queryProduct = queryProduct.OrderBy(x => x.ProductStock);
+                    break;
+                case -4:
+                    queryProduct = queryProduct.OrderByDescending(x => x.ProductStock);
+                    break;
+                default:
+                    queryProduct = queryProduct.OrderBy(x => x.ProductName);
+                    break;
+            }
+
+            return await queryProduct.ToListAsync();
         }
 
         // Mostrar el Producto
