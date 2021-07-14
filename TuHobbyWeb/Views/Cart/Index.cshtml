@@ -1,0 +1,51 @@
+﻿@model TuHobbyWeb.Models.Entities.Sale
+
+@if (Model == null || Model.Lines.Count == 0)
+{
+    <div class="alert alert-warning">
+        <strong>Aún no tienes productos en tu carrito <a href="/" class="btn btn-success">Empieza a comprar acá</a></strong>
+    </div> 
+} else
+{
+    <div class="card">
+        <div class="card-header bg-info text-white"><h3>Tus productos</h3></div>
+        <table class="table table-bordered">
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Sub Total</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Lines)
+            {
+                <tr>
+                    <td>@item.Product.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price</td>
+                    <td>@item.SubTotal</td>
+                    <td>
+                        <a href="/Cart/Remove/@item.SaleLineId" class="btn btn-danger btn-sm">
+                            <i class="fas fa-minus-circle"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <th colspan="2"></th>
+                <th>Sub Total</th>
+                <th>@Model.Lines.Sum(x => x.SubTotal)</th>
+            </tr>
+            <tr>
+                <th colspan="2"></th>
+                <th>IVA</th>
+                <th>@(Model.Lines.Sum(x => x.SubTotal) * 0.19)</th>
+            </tr>
+            <tr>
+                <th colspan="2"></th>
+                <th>Total</th>
+                <th>@(Model.Lines.Sum(x => x.SubTotal) * 0.19 + Model.Lines.Sum(x => x.SubTotal))</th>
+            </tr>
+        </table>
+    </div>
+}

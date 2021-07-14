@@ -20,9 +20,7 @@ namespace TuHobbyWeb.Models.ViewModels
         public int? ProductStock { get; set; }
         [Required]
         public int PlatformId { get; set; }
-
         public HttpPostedFileBase ProductFile { get; set; }
-
         public List<ProductPlatform> ProductPlatforms { get; set; }
 
         public Product Product { get; set; }

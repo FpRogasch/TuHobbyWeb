@@ -31,14 +31,14 @@ namespace TuHobbyWeb.Controllers
             var user = await _db.Users.FirstOrDefaultAsync(x => x.UserToken == token);
             if (user == null)
             {
-                TempData["ErrorMessage"] = "Imposible activar la cuenta";
+                TempData["ErrorMessage"] = "Imposible activar la cuenta, el token no ha sido encontrado";
                 return RedirectToAction("Index", "Home");
             }
 
             user.VerifiedAt = DateTime.Now;
             _db.Entry(user).Property(x => x.VerifiedAt).IsModified = true;
             await _db.SaveChangesAsync();
-            TempData["SuccessMessage"] = "El usuario fue activado correctamente";
+            TempData["SuccessMessage"] = "El usuario ha sido activado correctamente";
             return RedirectToAction("Login", "Auth");
         }
 
@@ -130,18 +130,18 @@ namespace TuHobbyWeb.Controllers
 
                 if (user == null)
                 {
-                    TempData["ErrorMessage"] = "The user had be no funded";
+                    TempData["ErrorMessage"] = "TEl Usuario no ha sido encontrado";
                     return RedirectToAction("Login");
                 }
 
                 if (!PasswordHelper.CheckPassword(model.Password, user.PasswordHash, user.PasswordSalt))
                 {
-                    TempData["ErrorMessage"] = "The password is incorrect";
+                    TempData["ErrorMessage"] = "La contraseña es incorrecta";
                     return RedirectToAction("Login");
                 }
 
                 await InitOwin(user);
-                TempData["SuccessMessage"] = "Successfully Connected";
+                TempData["SuccessMessage"] = "Conectado correctamente";
             }
             return RedirectToAction("Index", "Home");
         }

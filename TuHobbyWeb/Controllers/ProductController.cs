@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using TuHobbyWeb.DAL;
 using TuHobbyWeb.Helpers;
 using TuHobbyWeb.Models.Entities;
 using TuHobbyWeb.Models.ViewModels;
@@ -14,65 +15,19 @@ using TuHobbyWeb.Models.ViewModels;
 namespace TuHobbyWeb.Controllers
 {
     [Authorize(Roles = StringHelper.ROLE_ADMINISTRATOR)]
-
     public class ProductController : DefaultBaseController
     {
         private readonly AplicationDbContext _db = new AplicationDbContext();
         // GET: Product
         public async Task<ActionResult> Index(ProductIndexViewModel vm)
         {
-            vm.Products = await GetProducts(vm);
+            vm.Products = await ProductDAL.GetProducts(vm, _db);
 
             vm.Platforms = await _db.ProductPlatforms
                                     .OrderBy(x => x.ProductPlatformName)
                                     .ToListAsync();
 
             return View(vm);
-        }
-
-        public async Task<List<Product>> GetProducts(ProductIndexViewModel vm)
-        {
-            var queryProduct = _db.Products.AsQueryable();
-
-            if (vm.ProductCode != null)
-                queryProduct = queryProduct.Where(x => x.ProductCode == vm.ProductCode);
-            if (vm.ProductName != null)
-                queryProduct = queryProduct.Where(x => x.ProductName == vm.ProductName);
-            if (vm.PlatformId != null)
-                queryProduct = queryProduct.Where(x => x.PlatformId == vm.PlatformId);
-
-            switch (vm.Sort)
-            {
-                case 1:
-                    queryProduct = queryProduct.OrderBy(x => x.ProductCode);
-                    break;
-                case -1:
-                    queryProduct = queryProduct.OrderByDescending(x => x.ProductCode);
-                    break;
-                case 2:
-                    queryProduct = queryProduct.OrderBy(x => x.ProductName);
-                    break;
-                case -2:
-                    queryProduct = queryProduct.OrderByDescending(x => x.ProductName);
-                    break;
-                case 3:
-                    queryProduct = queryProduct.OrderBy(x => x.ProductPrice);
-                    break;
-                case -3:
-                    queryProduct = queryProduct.OrderByDescending(x => x.ProductPrice);
-                    break;
-                case 4:
-                    queryProduct = queryProduct.OrderBy(x => x.ProductStock);
-                    break;
-                case -4:
-                    queryProduct = queryProduct.OrderByDescending(x => x.ProductStock);
-                    break;
-                default:
-                    queryProduct = queryProduct.OrderBy(x => x.ProductName);
-                    break;
-            }
-
-            return await queryProduct.ToListAsync();
         }
 
         // Mostrar el Producto
@@ -83,7 +38,7 @@ namespace TuHobbyWeb.Controllers
 
             if(product == null)
             {
-                TempData["ErrorMessage"] = "El producto no fue encontrado";
+                TempData["ErrorMessage"] = "El Producto no fue encontrado";
                 return RedirectToAction("Index");
             }
 
@@ -123,7 +78,7 @@ namespace TuHobbyWeb.Controllers
                 if (product != null)
                 {
                     TempData["ErrorMessage"] = "El código del Producto ya se encuentra registrado";
-                    return View(model);
+                    return RedirectToAction("Create", "Product");
                 }
                 product = new Product
                 {
@@ -134,15 +89,25 @@ namespace TuHobbyWeb.Controllers
                     PlatformId = model.PlatformId
                 };
 
-                product.ProductImage = UploadFile(model.ProductFile, "products");
+                try
+                {
+                    product.ProductImage = UploadFile(model.ProductFile, "products");
+                }
+                catch (Exception)
+                {
+                    TempData["ErrorMessage"] = "Es requerido subir la imagen";
+                    return RedirectToAction("Create", "Product");
+                }
+
+
 
                 _db.Products.Add(product);
                 await _db.SaveChangesAsync();
                 TempData["SuccessMessage"] = "El Producto ha sido creado correctamente";
                 return RedirectToAction("Index");
             }
-
-            return View(model);
+            TempData["ErrorMessage"] = "Todos los campos son requeridos";
+            return RedirectToAction("Create", "Product");
         }
 
         // Modificar Producto en la DB
@@ -191,14 +156,14 @@ namespace TuHobbyWeb.Controllers
             var product = await _db.Products.FindAsync(productId);
             if (product == null)
             {
-                TempData["ErrorMessage"] = "El Producto no se ha encontrad, imposible eliminar.";
+                TempData["ErrorMessage"] = "El Producto no se ha encontrado, imposible eliminar.";
                 return RedirectToAction("Index");
             }
 
             _db.Products.Remove(product);
             await _db.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "El Producto se ha elimnado correctamente.";
+            TempData["SuccessMessage"] = "El Producto se ha eliminado correctamente.";
             return RedirectToAction("Index");
         }
 

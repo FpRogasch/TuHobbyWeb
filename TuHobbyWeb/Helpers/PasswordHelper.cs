@@ -32,9 +32,10 @@ namespace TuHobbyWeb.Helpers
             return true;
         }
 
+        /*
         internal static void CheckPassword(string password, byte[] passwordHash, object passwordSalt)
         {
             throw new NotImplementedException();
-        }
+        }*/
     }
 }

@@ -4,7 +4,6 @@
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -14,29 +13,27 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            @Html.Partial("_PartialMessage")
-            <div class="card mt-5">
-                <div class="card-header">
-                    <h3>Iniciar Sesión</h3>
-                </div>
-                <div class="card-body">
-                    <form action="/Auth/Login" method="post">
-                        @Html.AntiForgeryToken()
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" name="Email" class="form-control" value="" />
-                        </div>
-                        <div class="form-group">
-                            <label>Contrasena</label>
-                            <input type="password" name="Password" class="form-control" value="" />
-                        </div>
-                        <button type="submit" class="btn btn-outline-success">Enviar</button>
-                    </form>
-                </div>
-                <div class="card-footer text-center">
-                    <a href="/auth/register">Registrate aquí</a>
-                </div>
+        @Html.Partial("_PartialMessage")
+        <div class="card mt-5">
+            <div class="card-header">
+                <h3>Iniciar Sesión</h3>
+            </div>
+            <div class="card-body">
+                <form action="/Auth/Login" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="Email" class="form-control" value="" />
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input type="password" name="Password" class="form-control" value="" />
+                    </div>
+                    <button type="submit" class="btn btn-outline-success">Enviar</button>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <a href="/auth/register">Registrate Aquí</a>
             </div>
         </div>
     </div>

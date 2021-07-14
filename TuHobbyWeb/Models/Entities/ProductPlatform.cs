@@ -17,6 +17,6 @@ namespace TuHobbyWeb.Models.Entities
 
         public List<Product> Products { get; set; }
 
-        public int CountProducts => Products != null ? Products.Count : 0 ;
+        public int CountProducts => Products != null ? Products.Count : 0;
     }
 }

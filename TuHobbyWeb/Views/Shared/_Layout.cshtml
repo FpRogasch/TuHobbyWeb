@@ -1,9 +1,10 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My Tienda Online</title>
+    <title>@ViewBag.Title - Mi Tienda Online</title>
     <!--Font Awesome-->
     <link href="~/Content/fontawesome/css/all.min.css" rel="stylesheet">
     @Styles.Render("~/Content/css")
@@ -11,14 +12,12 @@
 </head>
 <body>
     @Html.Partial("_NavBar")
-    <div class="container">
-        @Html.Partial("_PartialMessage")
-    </div>
     <div class="container body-content">
+        @Html.Partial("_PartialMessage")
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
         </footer>
     </div>
 

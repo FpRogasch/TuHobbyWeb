@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using TuHobbyWeb.Helpers;
+using TuHobbyWeb.DAL;
+using TuHobbyWeb.Models.Entities;
+using TuHobbyWeb.Models.ViewModels;
 
 namespace TuHobbyWeb.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private readonly AplicationDbContext _db = new AplicationDbContext();
+        public async Task<ActionResult> Index(ProductIndexViewModel vm)
         {
-            if (User.IsInRole(StringHelper.ROLE_ADMINISTRATOR))
-            {
-                return RedirectToAction("Index", "Product");
-            }
-            else
-            {
-                return View();
-            }
+            vm.Products = await ProductDAL.GetProducts(vm, _db);
+
+            vm.Platforms = await _db.ProductPlatforms.OrderBy(x => x.ProductPlatformName).ToListAsync();
+
+            return View(vm);
         }
 
         public ActionResult About()
@@ -39,6 +38,13 @@ namespace TuHobbyWeb.Controllers
         public ActionResult Private()
         {
             return RedirectToAction("About");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+                _db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
