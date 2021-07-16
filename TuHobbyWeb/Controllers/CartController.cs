@@ -111,7 +111,7 @@ namespace TuHobbyWeb.Controllers
                     return Redirect(Request.UrlReferrer?.ToString());
                 }
 
-                line.Quantity = line.Quantity + 1;
+                line.Quantity++;
                 line.UpdatedAt = DateTime.Now;
                 _db.Entry(line).State = EntityState.Modified;
                 await _db.SaveChangesAsync();

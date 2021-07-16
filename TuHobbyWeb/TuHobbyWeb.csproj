@@ -168,10 +168,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DefaultBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlatformsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="DAL\ProductDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -209,6 +211,18 @@
     <Compile Include="Migrations\202107131946143_Add_Sales_Models.Designer.cs">
       <DependentUpon>202107131946143_Add_Sales_Models.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107142352136_Add_Description_toUserTable.cs" />
+    <Compile Include="Migrations\202107142352136_Add_Description_toUserTable.Designer.cs">
+      <DependentUpon>202107142352136_Add_Description_toUserTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107151717020_RestoretheApp.cs" />
+    <Compile Include="Migrations\202107151717020_RestoretheApp.Designer.cs">
+      <DependentUpon>202107151717020_RestoretheApp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107161956162_UpdateAdministratorData.cs" />
+    <Compile Include="Migrations\202107161956162_UpdateAdministratorData.Designer.cs">
+      <DependentUpon>202107161956162_UpdateAdministratorData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\AplicationDbContext.cs" />
     <Compile Include="Models\Entities\BaseEntity.cs" />
@@ -218,6 +232,7 @@
     <Compile Include="Models\Entities\Sale.cs" />
     <Compile Include="Models\Entities\SaleLine.cs" />
     <Compile Include="Models\Entities\User.cs" />
+    <Compile Include="Models\ViewModels\DashboardViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\PlatformCreateViewModel.cs" />
     <Compile Include="Models\ViewModels\ProductCreateViewModel.cs" />
@@ -271,6 +286,8 @@
     <Content Include="Views\Platforms\Create.cshtml" />
     <Content Include="Views\Platforms\Index.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -310,6 +327,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107131946143_Add_Sales_Models.resx">
       <DependentUpon>202107131946143_Add_Sales_Models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107142352136_Add_Description_toUserTable.resx">
+      <DependentUpon>202107142352136_Add_Description_toUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107151717020_RestoretheApp.resx">
+      <DependentUpon>202107151717020_RestoretheApp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107161956162_UpdateAdministratorData.resx">
+      <DependentUpon>202107161956162_UpdateAdministratorData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

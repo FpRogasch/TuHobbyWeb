@@ -55,7 +55,7 @@ namespace TuHobbyWeb.Controllers
             if (ModelState.IsValid)
             {
                 // Debo generar el Registro de Usuario
-                using  (var transaction = _db.Database.BeginTransaction())
+                using (var transaction = _db.Database.BeginTransaction())
                 {
                     try
                     {
@@ -130,7 +130,7 @@ namespace TuHobbyWeb.Controllers
 
                 if (user == null)
                 {
-                    TempData["ErrorMessage"] = "TEl Usuario no ha sido encontrado";
+                    TempData["ErrorMessage"] = "El Usuario no ha sido encontrado";
                     return RedirectToAction("Login");
                 }
 

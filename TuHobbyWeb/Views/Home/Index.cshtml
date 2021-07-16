@@ -1,28 +1,69 @@
 ﻿﻿@model TuHobbyWeb.Models.ViewModels.ProductIndexViewModel
 @{ ViewBag.Title = "Inicio"; }
 
-<div class="row mt-5">
-    @for (int i = 0; i < Model.Products.Count; i++)
-    {
-        if (i % 3 == 0)
-        {
-            @:<div class="row mt-5"></div>
-        }
-        <div class="col-4">
-            <div class="card" style="width: 18rem;">
-                <img width="286" height="160" src="@Model.Products[i].ProductImage" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">@Model.Products[i].ProductPlatform.ProductPlatformName</h5>
-                    <p class="card-text">@Model.Products[i].ProductName</p>
+<div class="container d-flex justify-content-center">
+    <div class="row mt-5">
+        @for (int i = 0; i < Model.Products.Count; i++)
+         {
+            if (i % 4 == 0)
+            {
+                
+            }
+            <div class="col-sm-3 mb-4">
+                <div class="card bg-dark border border-dark shadow rounded" style="width: 225px">
+                    <div style="display: flex; flex: 1 1 auto;">
+                        <img class="rounded-top" width="223" height="320" src="@Model.Products[i].ProductImage" alt="@Model.Products[i].ProductName">
+                    </div>
+                    <div class="card-header text-white" style="height: 95px">
+                        <p class="card-title mb-0"><strong>@Model.Products[i].ProductName</strong></p>
+                        @if (Model.Products[i].ProductPlatform.ProductPlatformName == "Nintendo")
+                         {
+                            <p class="card-text text-danger"><small><i class="fas fa-tag"></i> @Model.Products[i].ProductPlatform.ProductPlatformName</small></p>
+                         }
+                        @if (Model.Products[i].ProductPlatform.ProductPlatformName == "PlayStation")
+                         {
+                            <p class="card-text text-primary"><small><i class="fas fa-tag"></i> @Model.Products[i].ProductPlatform.ProductPlatformName</small></p>
+                         }
+                        @if (Model.Products[i].ProductPlatform.ProductPlatformName == "PC")
+                         {
+                            <p class="card-text text-warning"><small><i class="fas fa-tag"></i> @Model.Products[i].ProductPlatform.ProductPlatformName</small></p>
+                         }
+                        @if (Model.Products[i].ProductPlatform.ProductPlatformName == "Xbox")
+                         {
+                            <p class="card-text text-success"><small><i class="fas fa-tag"></i> @Model.Products[i].ProductPlatform.ProductPlatformName</small></p>
+                         }
+                    </div>
+                    <div class="card-body text-white mb-0 pt-2 pb-2">
+                        <div class="d-flex flex-row justify-content-between">
+                            <small class="text">Stock:</small>
+                            <small>@Model.Products[i].ProductStock</small>
+                        </div>
+                        <div class="d-flex flex-row justify-content-between mt-3">
+                            <small class="text">Precio:</small>
+                            <h6>&dollar;@Model.Products[i].ProductPrice</h6>
+                        </div>
+                    </div>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a href="/cart/add?productId=@Model.Products[i].ProductId" class="btn btn-primary">Agregar <i class="fas fa-cart-plus"></i></a> 
-                    }else
+                <a href="/cart/add?productId=@Model.Products[i].ProductId" class="btn btn-info rounded-bottom"><strong>Agregar <i class="fas fa-cart-plus"></i></strong></a> }
+                    else
                     {
-                    <a href="/auth/login" class="btn btn-primary">Iniciar Sesión <i class="fas fa-sign-in-alt"></i></a>
+                        <span data-toggle="popover" data-content="Debe iniciar sesión antes de realizar una compra.">
+                            <button type="button"
+                                    class="btn btn-block btn-outline-info"
+                                    style="pointer-events: none;"
+                                    disabled>
+                                <strong>Agregar <i class="fas fa-cart-plus"></i></strong>
+                            </button>
+                        </span>
                     }
                 </div>
             </div>
-        </div>
-     }
+         }
+    </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+</script>

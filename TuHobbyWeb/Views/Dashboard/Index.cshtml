@@ -1,0 +1,46 @@
+﻿@model TuHobbyWeb.Models.ViewModels.DashboardViewModel
+@{
+    ViewBag.Title = "Dashboard de Administración";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3>@ViewBag.Title</h3>
+    </div>
+    <div class="card-body">
+        <div class="row text-center">
+            <div class="col-6">
+                <div class="card bg-info text-white">
+                    <h3 class="card-title">Usuarios registrados</h3>
+                    <h2>@Model.CountUsers</h2>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card bg-info text-white">
+                    <h3 class="card-title">Juegos registrados</h3>
+                    <h2>@Model.CountGames</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center mt-3">
+            <div class="col-3">
+                <div class="card bg-info text-white">
+                    <h3 class="card-title">Juegos<br/>Nintendo</h3>
+                    <h2>@Model.CountNintendo</h2>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card bg-info text-white">
+                    <h3 class="card-title">Juegos<br/>PlayStation</h3>
+                    <h2>@Model.CountPlaystation</h2>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card bg-info text-white">
+                    <h3 class="card-title">Juegos<br/>PC</h3>
+                    <h2>@Model.CountPC</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -24,7 +24,7 @@ namespace TuHobbyWeb.Models.Entities
         [Required]
         public byte[] PasswordHash { get; set; }
         [Required]
-        //
+        
         public byte[] PasswordSalt { get; set; }
 
         public string PhoneNumber { get; set; }
@@ -40,5 +40,9 @@ namespace TuHobbyWeb.Models.Entities
         public string FullName => $"{FirstName} {LastName}";
 
         public string UserToken { get; set; }
+
+        public string Descriptiom { get; set; }
+
+        public List<User> Users { get; set; }
     }
 }

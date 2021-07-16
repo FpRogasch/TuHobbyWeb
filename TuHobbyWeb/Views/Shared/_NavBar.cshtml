@@ -1,48 +1,50 @@
 ﻿@using TuHobbyWeb.Helpers;
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Mi tienda Web</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar sticky-top bg-dark navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/">TuHobbyWeb</a>
+    <div class="ml-auto">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                @if (User.Identity.IsAuthenticated && User.IsInRole(StringHelper.ROLE_ADMINISTRATOR))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Gestión
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/Dashboard">Panel de Control</a>
+                            <a class="dropdown-item" href="/Product">Productos</a>
+                            <a class="dropdown-item" href="/Platforms">Plataformas</a>
+                        </div>
+                    </li>
+                }
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            @if(User.Identity.IsAuthenticated && User.IsInRole(StringHelper.ROLE_ADMINISTRATOR))
-            {
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Gestión
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/Product">Productos</a>
-                        <a class="dropdown-item" href="/Platforms">Plataformas</a>
-                    </div>
-                </li>
-            }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile" tabindex="-1" aria-disabled="true">@User.Identity.GetFullName()</a>
+                    </li>
+                    <li class="nav-item mr-3">
+                        <a class="nav-link" href="/Auth/Logout" tabindex="-1" aria-disabled="true"><i class="fas fa-user-times"></i></a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item mr-3">
+                        <a class="nav-link" href="/auth/login" tabindex="-1" aria-disabled="true"><i class="fas fa-user"></i> Iniciar Sesión</a>
+                    </li>
+                }
 
-            @if (User.Identity.IsAuthenticated)
-            {
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile" tabindex="-1" aria-disabled="true">@User.Identity.GetFullName()</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Auth/Logout" tabindex="-1" aria-disabled="true">Cerrar Sesión</a>
-                </li>
-            }
-            else
-            {
-                <li class="nav-item">
-                    <a class="nav-link" href="/auth/login" tabindex="-1" aria-disabled="true">Iniciar Sesión</a>
-                </li>
-            }
-
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <a href="/Cart" class="btn btn-primary mr-3">
-                <i class="fas fa-shopping-cart"></i> <span class="badge badge-light">@(Session["cart_badge"] != null ? Session["cart_badge"] : 0)</span>
-            </a>
-            <input class="form-control mr-sm-2" name="Search" type="search" placeholder="Buscar" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
+            </ul>
+        </div>
     </div>
+    <a href="/Cart" class="btn btn-info mr-3">
+        <i class="fas fa-shopping-cart"></i> <span class="badge badge-light">@(Session["cart_badge"] != null ? Session["cart_badge"] : 0)</span>
+    </a>
+    <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" name="Search" type="search" placeholder="Buscar" aria-label="Search">
+        <button class="btn btn-outline-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+    </form>
 </nav>

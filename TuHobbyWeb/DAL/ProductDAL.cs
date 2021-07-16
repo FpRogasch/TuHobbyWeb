@@ -19,6 +19,8 @@ namespace TuHobbyWeb.DAL
                 queryProduct = queryProduct.Where(x => x.ProductName == vm.ProductName);
             if (vm.PlatformId != null)
                 queryProduct = queryProduct.Where(x => x.PlatformId == vm.PlatformId);
+            if (!string.IsNullOrEmpty(vm.Search))
+                queryProduct = queryProduct.Where(x => x.ProductName.Contains(vm.Search) || x.ProductCode == vm.Search);
 
             switch (vm.Sort)
             {

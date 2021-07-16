@@ -11,6 +11,8 @@ namespace TuHobbyWeb.Models.ViewModels
 
         public string ProductName { get; set; }
 
+        public string Search { get; set; }
+
         public int? PlatformId { get; set; } // Por defecto NULL
 
         public int Sort { get; set; } // Por defecto es 0

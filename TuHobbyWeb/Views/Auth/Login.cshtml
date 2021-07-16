@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -11,10 +10,10 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body style="background-image: url('../../Content/images/backgroundLogin.jpg');">
     <div class="container">
         @Html.Partial("_PartialMessage")
-        <div class="card mt-5">
+        <div class="card mt-5 bg-dark" style="max-width: 750px; box-shadow: 0px 0px 30px 15px #39A2DB; color: #A2DBFA; border-color: #39A2DB">
             <div class="card-header">
                 <h3>Iniciar Sesión</h3>
             </div>
@@ -29,11 +28,11 @@
                         <label>Contraseña</label>
                         <input type="password" name="Password" class="form-control" value="" />
                     </div>
-                    <button type="submit" class="btn btn-outline-success">Enviar</button>
+                    <button type="submit" class="btn btn-outline-info">Enviar</button>
                 </form>
             </div>
-            <div class="card-footer text-center">
-                <a href="/auth/register">Registrate Aquí</a>
+            <div class="card-footer text-center" style="background-color: #39A2DB">
+                <a href="/auth/register" class="text-dark" style="text-decoration: none"><strong>Registrate Aquí</strong></a>
             </div>
         </div>
     </div>
