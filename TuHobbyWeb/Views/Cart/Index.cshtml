@@ -47,5 +47,6 @@
                 <th>@(Model.Lines.Sum(x => x.SubTotal) * 0.19 + Model.Lines.Sum(x => x.SubTotal))</th>
             </tr>
         </table>
+        <a href="/cart/confirmed?saleId=@Model.SaleId" class="btn btn-block btn-success">Confirmar Compra</a>
     </div>
 }

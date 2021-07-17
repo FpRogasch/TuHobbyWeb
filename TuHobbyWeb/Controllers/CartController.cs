@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using TuHobbyWeb.Models.Entities;
 using TuHobbyWeb.Helpers;
+using TuHobbyWeb.Models.ViewModels;
 
 namespace TuHobbyWeb.Controllers
 {
@@ -21,6 +22,11 @@ namespace TuHobbyWeb.Controllers
             var sale = await _db.Sales
                             .Include(x => x.Lines)
                             .FirstOrDefaultAsync(x => x.ConfirmedAt == null && x.CustomerId == userId);
+            if (sale == null)
+            {
+                TempData["ErrorMessage"] = "No hay productos en el carrito de compra";
+                return RedirectToAction("Index", "Home");
+            }
 
             foreach (var item in sale.Lines)
             {
@@ -135,6 +141,23 @@ namespace TuHobbyWeb.Controllers
                 TempData["SuccessMessage"] = "Producto agregado correctamente";
                 return Redirect(Request.UrlReferrer?.ToString());
             }
+        }
+
+        public async Task<ActionResult> Confirmed(int saleId)
+        {
+            int userId = User.Identity.GetId();
+            var sale = await _db.Sales
+                            .Include(x => x.Lines)
+                            .FirstOrDefaultAsync(x => x.ConfirmedAt == null && x.CustomerId == userId && x.SaleId == saleId);
+            sale.UpdatedAt = DateTime.Now;
+            sale.ConfirmedAt = DateTime.Now;
+            sale.SubTotal = sale.Lines.Sum(x => x.SubTotal);
+
+            _db.Entry(sale).State = EntityState.Modified;
+            await _db.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "La venta se ha realizado correctamente";
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -9,35 +9,47 @@
     </div>
     <div class="card-body">
         <div class="row text-center">
-            <div class="col-6">
+            <div class="col-4">
                 <div class="card bg-info text-white">
                     <h3 class="card-title">Usuarios registrados</h3>
                     <h2>@Model.CountUsers</h2>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-4">
                 <div class="card bg-info text-white">
                     <h3 class="card-title">Juegos registrados</h3>
                     <h2>@Model.CountGames</h2>
                 </div>
             </div>
+            <div class="col-4">
+                <div class="card bg-info text-white">
+                    <h3 class="card-title">Ventas Registradas</h3>
+                    <h2>@Model.CountSales</h2>
+                </div>
+            </div>
         </div>
         <div class="row text-center mt-3">
             <div class="col-3">
-                <div class="card bg-info text-white">
-                    <h3 class="card-title">Juegos<br/>Nintendo</h3>
+                <div class="card bg-danger text-white">
+                    <h3 class="card-title">Juegos<br />Nintendo</h3>
                     <h2>@Model.CountNintendo</h2>
                 </div>
             </div>
             <div class="col-3">
-                <div class="card bg-info text-white">
-                    <h3 class="card-title">Juegos<br/>PlayStation</h3>
+                <div class="card bg-primary text-white">
+                    <h3 class="card-title">Juegos<br />PlayStation</h3>
                     <h2>@Model.CountPlaystation</h2>
                 </div>
             </div>
             <div class="col-3">
-                <div class="card bg-info text-white">
-                    <h3 class="card-title">Juegos<br/>PC</h3>
+                <div class="card bg-success text-white">
+                    <h3 class="card-title">Juegos<br />Xbox</h3>
+                    <h2>@Model.CountXbox</h2>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card bg-warning text-white">
+                    <h3 class="card-title">Juegos<br />PC</h3>
                     <h2>@Model.CountPC</h2>
                 </div>
             </div>

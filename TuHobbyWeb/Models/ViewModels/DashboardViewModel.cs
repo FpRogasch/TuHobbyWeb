@@ -11,9 +11,13 @@ namespace TuHobbyWeb.Models.ViewModels
 
         public int CountGames { get; set; }
 
+        public int CountSales { get; set; }
+
         public int CountNintendo { get; set; }
 
         public int CountPlaystation { get; set; }
+
+        public int CountXbox { get; set; }
 
         public int CountPC { get; set; }
 

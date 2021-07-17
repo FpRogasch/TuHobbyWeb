@@ -21,8 +21,10 @@ namespace TuHobbyWeb.Controllers
             {
                 CountUsers = _db.Users.Count(), // Hace un select count(FirstName) from users
                 CountGames = _db.Products.Count(),
+                CountSales = _db.Sales.Where(x => x.ConfirmedAt != null).Count(),
                 CountNintendo = _db.Products.Where(x => x.PlatformId == 1).Count(),
                 CountPlaystation = _db.Products.Where(x => x.PlatformId == 2).Count(),
+                CountXbox = _db.Products.Where(x => x.PlatformId == 1002).Count(),
                 CountPC = _db.Products.Where(x => x.PlatformId == 3).Count()
             };
 
