@@ -2,15 +2,15 @@
 @{
     ViewBag.Title = "Formulario de Registro";
 }
-<div class="card mt-5">
-    <div class="card-header">
-        @ViewBag.Title
+<div class="card mt-5 bg-dark" style="max-width: 750px; box-shadow: 0px 0px 30px 15px #39A2DB; color: #A2DBFA; border-color: #39A2DB">
+    <div class="card-header text-dark" style="background-color: #39A2DB">
+        <h3>@ViewBag.Title</h3>
     </div>
     <div class="card-body">
         <div class="text-danger">
             @Html.ValidationSummary()
         </div>
-        <form action="/auth/register" method="post">
+        <form action="/auth/register" method="post" style="color: #A2DBFA">
             @Html.AntiForgeryToken()
             <div class="form-group">
                 <label>Nombre</label>
@@ -37,7 +37,7 @@
                 <input type="password" class="form-control" name="PasswordConfirm" value="" />
                 @Html.ValidationMessageFor(x => x.PasswordConfirm, null, new { @class = "text-danger" })
             </div>
-            <button class="btn btn-success">Enviar</button>
+            <button class="btn btn-info">Enviar</button>
         </form>
     </div>
 </div>

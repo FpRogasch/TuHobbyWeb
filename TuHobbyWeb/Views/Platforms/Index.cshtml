@@ -1,10 +1,18 @@
 ﻿@model List<TuHobbyWeb.Models.Entities.ProductPlatform>
 @{
+    ViewBag.Title = "Listado de platafaormas registradas";
 }
 
 <div class="card mt-4">
     <div class="card-header">
-        <h3>Listado de Plataformas Registradas</h3>
+        <div class="row">
+            <div class="col-8">
+                <h3>@ViewBag.Title</h3>
+            </div>
+            <div class="col-4">
+                <a href="/Platforms/Create" class="btn btn-success float-right">Agregar Plataforma</a>
+            </div>
+        </div>
     </div>
     <div class="table-responsive">
         <table class="table">
@@ -17,10 +25,10 @@
             {
                 <tr>
                     <td>@item.ProductPlatformName</td>
-                    <td><img src="@item.ProductPlatformLogo" alt="@item.ProductPlatformName" width="200"/></td>
+                    <td><img src="@item.ProductPlatformLogo" alt="@item.ProductPlatformName" width="200" /></td>
                     <td>@item.CountProducts</td>
                 </tr>
-            }
+       }
         </table>
     </div>
 </div>
