@@ -1,22 +1,22 @@
 ﻿@model List<TuHobbyWeb.Models.Entities.ProductPlatform>
 @{
-    ViewBag.Title = "Listado de platafaormas registradas";
+    ViewBag.Title = "Listado de Plataformas Registradas";
 }
 
-<div class="card mt-4">
-    <div class="card-header">
+<div class="card mt-5" style="box-shadow: 0px 0px 30px 5px #39A2DB;">
+    <div class="card-header bg-dark border" style="color: #A2DBFA; border-color: #39A2DB">
         <div class="row">
             <div class="col-8">
                 <h3>@ViewBag.Title</h3>
             </div>
             <div class="col-4">
-                <a href="/Platforms/Create" class="btn btn-success float-right">Agregar Plataforma</a>
+                <a href="/Platforms/Create" class="btn btn-info btn-lg float-right"><i class="fas fa-plus-square"></i></a>
             </div>
         </div>
     </div>
     <div class="table-responsive">
-        <table class="table">
-            <tr>
+        <table class="table table-hover">
+            <tr class="bg-dark border" style="color: #A2DBFA; border-color: #39A2DB">
                 <th>Nombre</th>
                 <th>Logo</th>
                 <th>Cantidad de Juegos</th>

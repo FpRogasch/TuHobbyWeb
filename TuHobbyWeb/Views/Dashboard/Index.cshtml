@@ -1,56 +1,124 @@
 ﻿@model TuHobbyWeb.Models.ViewModels.DashboardViewModel
 @{
-    ViewBag.Title = "Dashboard de Administración";
+    ViewBag.Title = "Panel de Administración";
 }
 
-<div class="card">
-    <div class="card-header">
-        <h3>@ViewBag.Title</h3>
-    </div>
-    <div class="card-body">
-        <div class="row text-center">
-            <div class="col-4">
-                <div class="card bg-info text-white">
-                    <h3 class="card-title">Usuarios registrados</h3>
-                    <h2>@Model.CountUsers</h2>
-                </div>
+<div class="card mt-5" style="box-shadow: 0px 0px 30px 5px black; border: 2px solid #A2DBFA">
+    <div class="card-header bg-dark" style="color: #A2DBFA; border-bottom: 2px solid black">
+        <div class="row">
+            <div class="col-12 col-lg-8 align-self-center">
+                <h3>@ViewBag.Title</h3>
             </div>
-            <div class="col-4">
-                <div class="card bg-info text-white">
-                    <h3 class="card-title">Juegos registrados</h3>
-                    <h2>@Model.CountGames</h2>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card bg-info text-white">
-                    <h3 class="card-title">Ventas Registradas</h3>
-                    <h2>@Model.CountSales</h2>
+            <div class="col-12 col-lg-4">
+                <div class="row">
+                    <div class="col-6">
+                        <a href="/product" class="btn btn-outline-primary btn-block float-right">Productos</a>
+                    </div>
+                    <div class="col-6">
+                        <a href="/platforms" class="btn btn-outline-warning btn-block float-right">Plataformas</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row text-center mt-3">
-            <div class="col-3">
-                <div class="card bg-danger text-white">
-                    <h3 class="card-title">Juegos<br />Nintendo</h3>
-                    <h2>@Model.CountNintendo</h2>
+    </div>
+    <div class="card-body bg-secondary">
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 style="margin-top: 4px; margin-bottom: 0px">Registros Principales</h4>
+            </div>
+        </div>
+        <hr style="border: 1px solid black" />
+        <div class="row text-center">
+            <div class="col-12 col-md-6 col-lg-4 mt-3">
+                <div class="card text-white" style="background-color: #39A2DB; border: 2px solid #A2DBFA ">
+                    <div class="card-header">
+                        <h3 class="card-title" style="margin: 2px 0px">Usuarios registrados</h3>
+                    </div>
+                    <div class="card-body p-2" style="background-color: #A2DBFA">
+                        <div class="container d-inline-flex justify-content-center">
+                            <h2 class="rounded-circle text-white" style="margin: 2px 0px; padding: 15px 25px; background-color: #053742; border: 5px dashed #39A2DB">@Model.CountUsers</h2>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="card bg-primary text-white">
-                    <h3 class="card-title">Juegos<br />PlayStation</h3>
-                    <h2>@Model.CountPlaystation</h2>
+            <div class="col-12 col-md-6 col-lg-4 mt-3">
+                <div class="card text-white" style="background-color: #39A2DB; border: 2px solid #A2DBFA ">
+                    <div class="card-header">
+                        <h3 class="card-title" style="margin: 2px 0px">Juegos registrados</h3>
+                    </div>
+                    <div class="card-body p-2" style="background-color: #A2DBFA">
+                        <div class="container d-inline-flex justify-content-center">
+                            <h2 class="rounded-circle text-white" style="margin: 2px 0px; padding: 15px 25px; background-color: #053742; border: 5px dashed #39A2DB">@Model.CountGames</h2>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="card bg-success text-white">
-                    <h3 class="card-title">Juegos<br />Xbox</h3>
-                    <h2>@Model.CountXbox</h2>
+            <div class="col-12 col-md-6 col-lg-4 mt-3">
+                <div class="card text-white" style="background-color: #39A2DB; border: 2px solid #A2DBFA ">
+                    <div class="card-header">
+                        <h3 class="card-title" style="margin: 2px 0px">Ventas registrados</h3>
+                    </div>
+                    <div class="card-body p-2" style="background-color: #A2DBFA">
+                        <div class="container d-inline-flex justify-content-center">
+                            <h2 class="rounded-circle text-white" style="margin: 2px 0px; padding: 15px 25px; background-color: #053742; border: 5px dashed #39A2DB">@Model.CountSales</h2>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="card bg-warning text-white">
-                    <h3 class="card-title">Juegos<br />PC</h3>
-                    <h2>@Model.CountPC</h2>
+        </div>
+        <div class="row mt-5">
+            <div class="col-sm-12">
+                <h4 style="margin-top: 4px; margin-bottom: 0px">Registros detallados de Juegos</h4>
+            </div>
+        </div>
+        <hr style="border: 1px solid black" />
+        <div class="row text-center">
+            <div class="col-6 col-lg-3 mt-3">
+                <div class="card text-white" style="background-color: #dd2020; border: 2px solid #171717 ">
+                    <div class="card-header">
+                        <h3 class="card-title" style="margin: 2px 0px">Juegos<br />Nintendo</h3>
+                    </div>
+                    <div class="card-body p-2" style="background-color: #444444">
+                        <div class="container d-inline-flex justify-content-center">
+                            <h2 class="rounded-circle text-white" style="margin: 2px 0px; padding: 15px 25px; background-color: #171717; border: 5px dashed #dd2020 ">@Model.CountNintendo</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 mt-3">
+                <div class="card text-white" style="background-color: #003087; border: 2px solid #171717 ">
+                    <div class="card-header">
+                        <h3 class="card-title" style="margin: 2px 0px">Juegos<br />PlayStation</h3>
+                    </div>
+                    <div class="card-body p-2" style="background-color: #000000 ">
+                        <div class="container d-inline-flex justify-content-center">
+                            <h2 class="rounded-circle text-white" style="margin: 2px 0px; padding: 15px 25px; background-color: #171717; border: 5px dashed #003087 ">@Model.CountPlaystation</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 mt-3">
+                <div class="card text-white" style="background-color: #107C10; border: 2px solid #171717 ">
+                    <div class="card-header">
+                        <h3 class="card-title" style="margin: 2px 0px">Juegos<br />Xbox</h3>
+                    </div>
+                    <div class="card-body p-2" style="background-color: #3A3A3A ">
+                        <div class="container d-inline-flex justify-content-center">
+                            <h2 class="rounded-circle text-white" style="margin: 2px 0px; padding: 15px 25px; background-color: #171717; border: 5px dashed #107C10 ">@Model.CountXbox</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 mt-3">
+                <div class="card text-white" style="background-color: #5F939A; border: 2px solid #171717 ">
+                    <div class="card-header">
+                        <h3 class="card-title" style="margin: 2px 0px">Juegos<br />PC</h3>
+                    </div>
+                    <div class="card-body p-2" style="background-color: #000000">
+                        <div class="container d-inline-flex justify-content-center">
+                            <h2 class="rounded-circle text-white" style="margin: 2px 0px; padding: 15px 25px; background-color: #171717; border: 5px dashed #5F939A ">@Model.CountPC</h2>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
