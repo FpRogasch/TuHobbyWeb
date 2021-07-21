@@ -6,11 +6,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using TuHobbyWeb.Helpers;
 using TuHobbyWeb.Models.Entities;
 using TuHobbyWeb.Models.ViewModels;
 
 namespace TuHobbyWeb.Controllers
 {
+    [Authorize(Roles = StringHelper.ROLE_ADMINISTRATOR)]
     public class PlatformsController : DefaultBaseController
     {
         private readonly AplicationDbContext _db = new AplicationDbContext();

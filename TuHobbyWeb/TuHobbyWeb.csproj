@@ -223,6 +223,18 @@
     <Compile Include="Migrations\202107161956162_UpdateAdministratorData.Designer.cs">
       <DependentUpon>202107161956162_UpdateAdministratorData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107211627213_Add_Users_to_SaleTable.cs" />
+    <Compile Include="Migrations\202107211627213_Add_Users_to_SaleTable.Designer.cs">
+      <DependentUpon>202107211627213_Add_Users_to_SaleTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107211643352_Add_UsersEmail_to_SaleTable.cs" />
+    <Compile Include="Migrations\202107211643352_Add_UsersEmail_to_SaleTable.Designer.cs">
+      <DependentUpon>202107211643352_Add_UsersEmail_to_SaleTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107211652098_Remove_UsersEmail_to_SaleTable.cs" />
+    <Compile Include="Migrations\202107211652098_Remove_UsersEmail_to_SaleTable.Designer.cs">
+      <DependentUpon>202107211652098_Remove_UsersEmail_to_SaleTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\AplicationDbContext.cs" />
     <Compile Include="Models\Entities\BaseEntity.cs" />
@@ -288,6 +300,7 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Dashboard\Sales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -336,6 +349,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107161956162_UpdateAdministratorData.resx">
       <DependentUpon>202107161956162_UpdateAdministratorData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107211627213_Add_Users_to_SaleTable.resx">
+      <DependentUpon>202107211627213_Add_Users_to_SaleTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107211643352_Add_UsersEmail_to_SaleTable.resx">
+      <DependentUpon>202107211643352_Add_UsersEmail_to_SaleTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107211652098_Remove_UsersEmail_to_SaleTable.resx">
+      <DependentUpon>202107211652098_Remove_UsersEmail_to_SaleTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

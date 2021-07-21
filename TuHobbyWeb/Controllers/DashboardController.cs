@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TuHobbyWeb.Helpers;
@@ -29,6 +31,13 @@ namespace TuHobbyWeb.Controllers
             };
 
             return View(vm);
+        }
+
+        // Muestra las Ventas
+        public async Task<ActionResult> Sales()
+        {
+            var sales = await _db.Sales.ToListAsync();
+            return View(sales);
         }
 
         protected override void Dispose(bool disposing)

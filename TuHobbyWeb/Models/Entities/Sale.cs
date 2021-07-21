@@ -26,5 +26,6 @@ namespace TuHobbyWeb.Models.Entities
         public DateTime? ConfirmedAt { get; set; }
 
         public List<SaleLine> Lines { get; set; }
+
     }
 }
